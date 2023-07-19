@@ -77,9 +77,9 @@ export default function Navbar() {
           direction={"row"}
           spacing={6}
         >
-          <Button onClick={toggleColorMode}>
+          {/* <Button onClick={toggleColorMode}>
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          </Button>
+          </Button> */}
         </Stack>
       </Flex>
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Container } from "@chakra-ui/react";
 import Navbar from "./Navbar";
-import styled from "styled-components";
 
 export function Layout({ children }) {
   return (
@@ -13,10 +12,3 @@ export function Layout({ children }) {
   );
 }
 
-const Scroll = styled.span`
-  @media (max-width: 920px) {
-    button {
-      margin-bottom: 30px;
-    }
-  }
-`;

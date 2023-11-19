@@ -3,17 +3,18 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
-  Link,
+  
   Popover,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Container,
+  Button,
   useColorMode,
 } from "@chakra-ui/react";
 import {
@@ -25,9 +26,11 @@ import {
   SunIcon,
 } from "@chakra-ui/icons";
 
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
-  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box>
@@ -38,49 +41,68 @@ export default function Navbar() {
         px={{ base: 4, lg: 20 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={useColorModeValue("white","#191919")}
         align={"center"}
       >
-        <Flex
-          flex={{ base: 1, md: "auto" }}
-          ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
-        >
-          <IconButton
-            onClick={onToggle}
-            icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-            }
-            variant={"ghost"}
-            aria-label={"Toggle Navigation"}
-          />
-        </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("black", "white")}
-            fontWeight="700"
-            fontSize="17px"
+        <Container maxW="container.xl">
+          <Flex
+            flex={{ base: 1, md: "auto" }}
+            ml={{ base: -2 }}
+            display={{ base: "flex", md: "none" }}
           >
-            Timnik.com
-          </Text>
-
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav />
+            <IconButton
+              onClick={onToggle}
+              icon={
+                isOpen ? (
+                  <CloseIcon w={3} h={3} />
+                ) : (
+                  <HamburgerIcon w={5} h={5} />
+                )
+              }
+              variant={"ghost"}
+              aria-label={"Toggle Navigation"}
+            />
           </Flex>
-        </Flex>
+          <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+            <Link to="/">
+            <Text
+              textAlign={useBreakpointValue({ base: "center", md: "left" })}
+              fontFamily={"heading"}
+              color={useColorModeValue("black", "white")}
+              fontWeight="600"
+              fontSize="25px"
+            >
+              Timnik.com
+            </Text>
+            </Link>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          {/* <Button onClick={toggleColorMode}>
-            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          </Button> */}
-        </Stack>
+            <Flex display={{ base: "none", md: "flex" }} ml={10}>
+              <DesktopNav />
+            </Flex>
+
+            <Stack
+              flex={{ base: 1, md: 1 }}
+              justify={"flex-end"}
+              direction={"row"}
+              spacing={0}
+            >
+              <Button
+                onClick={toggleColorMode}
+                borderRadius="5px"
+                variant="ghost"
+                _hover={{
+                  transform: "rotate(45deg)"
+                }}
+              >
+                {colorMode === "light" ? (
+                  <MoonIcon color="#ED8936" boxSize={7} />
+                ) : (
+                  <SunIcon color="#F6E05E" boxSize={7} />
+                )}
+              </Button>
+            </Stack>
+          </Flex>
+        </Container>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -96,24 +118,29 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} spacing={4} marginTop="8px">
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? "#"}
-                fontSize={"sm"}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                }}
+               <Text
+                  mr={1}
+                  ml={1}
+                  href={navItem.href ?? "#"}
+                  fontSize={"lg"}
+                  fontWeight={500}
+                  color={linkColor}
+                  _hover={{
+                    textDecoration: "none",
+                    color: linkHoverColor,
+                  }}
               >
+              <Link to = {navItem.href ?? "#"}>
+               
                 {navItem.label}
+                
               </Link>
+              </Text>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -245,42 +272,37 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
+  
   {
-    label: "Inspiration",
+    label: "Blog",
+    href: "#",
+  },
+  {
+    label: "Music & Tabs",
+    href: "#",
+  },
+  {
+    label: "Books",
+    href: "/books",
+  },
+  
+  {
+    label: "Apps",
     children: [
       {
-        label: "Explore Design Work",
+        label: "Capitnest.com",
         subLabel: "Trending Design to inspire you",
         href: "#",
       },
       {
-        label: "New & Noteworthy",
+        label: "Wellbe",
         subLabel: "Up-and-coming Designers",
         href: "#",
       },
     ],
   },
   {
-    label: "Apps",
-    children: [
-      {
-        label: "Capitnest.com",
-        subLabel: "News & Market Data tracking app about crypto.",
-        href: "https://capitnest.com/",
-      },
-      {
-        label: "Timnik Movies",
-        subLabel: "Platform where you can watch movies for free.",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Tabs",
-    href: "#",
-  },
-  {
-    label: "Hire Designers",
+    label: "About",
     href: "#",
   },
 ];

@@ -6,7 +6,6 @@ import {
   Stack,
   Collapse,
   Icon,
-  
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -16,6 +15,7 @@ import {
   Container,
   Button,
   useColorMode,
+  Image,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -35,17 +35,23 @@ export default function Navbar() {
   return (
     <Box>
       <Flex
-        color={useColorModeValue("rgba(0, 0, 0, 0.80)", "white")}
+        color="white"
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4, lg: 20 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("white","#191919")}
+        borderColor="#141414ff"
+        background="#141414ff"
         align={"center"}
       >
-        <Container maxW="container.xl">
+        <Container
+          maxW="container.xl"
+          backgroundColor="#141414ff"
+          color="white"
+        >
           <Flex
+            background="#141414ff"
             flex={{ base: 1, md: "auto" }}
             ml={{ base: -2 }}
             display={{ base: "flex", md: "none" }}
@@ -65,42 +71,25 @@ export default function Navbar() {
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
             <Link to="/">
-            <Text
-              textAlign={useBreakpointValue({ base: "center", md: "left" })}
-              fontFamily={"heading"}
-              color={useColorModeValue("black", "white")}
-              fontWeight="600"
-              fontSize="25px"
-            >
-              Timnik.com
-            </Text>
+              <Flex>
+                <Image src="/images/logo.png" width="55px" />
+                <Text
+                  textAlign={useBreakpointValue({ base: "center", md: "left" })}
+                  fontFamily={"heading"}
+                  color="white"
+                  fontWeight="600"
+                  fontSize="17px"
+                >
+                  Advanced Psychological
+                  <br />
+                  Technologies Research
+                </Text>
+              </Flex>
             </Link>
 
             <Flex display={{ base: "none", md: "flex" }} ml={10}>
               <DesktopNav />
             </Flex>
-
-            <Stack
-              flex={{ base: 1, md: 1 }}
-              justify={"flex-end"}
-              direction={"row"}
-              spacing={0}
-            >
-              <Button
-                onClick={toggleColorMode}
-                borderRadius="5px"
-                variant="ghost"
-                _hover={{
-                  transform: "rotate(45deg)"
-                }}
-              >
-                {colorMode === "light" ? (
-                  <MoonIcon color="#ED8936" boxSize={7} />
-                ) : (
-                  <SunIcon color="#F6E05E" boxSize={7} />
-                )}
-              </Button>
-            </Stack>
           </Flex>
         </Container>
       </Flex>
@@ -113,33 +102,29 @@ export default function Navbar() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const linkColor = "white";
+  const linkHoverColor = "#CBD5E0";
+  const popoverContentBgColor = "black";
 
   return (
-    <Stack direction={"row"} spacing={4} marginTop="8px">
+    <Stack direction={"row"} spacing={4} marginTop="12px">
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-               <Text
-                  mr={1}
-                  ml={1}
-                  href={navItem.href ?? "#"}
-                  fontSize={"lg"}
-                  fontWeight={500}
-                  color={linkColor}
-                  _hover={{
-                    textDecoration: "none",
-                    color: linkHoverColor,
-                  }}
+              <Text
+                mr={1}
+                ml={1}
+                href={navItem.href ?? "#"}
+                fontSize={"lg"}
+                fontWeight={500}
+                color={linkColor}
+                _hover={{
+                  textDecoration: "none",
+                  color: linkHoverColor,
+                }}
               >
-              <Link to = {navItem.href ?? "#"}>
-               
-                {navItem.label}
-                
-              </Link>
+                <Link to={navItem.href ?? "#"}>{navItem.label}</Link>
               </Text>
             </PopoverTrigger>
 
@@ -272,37 +257,26 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
-  
-  {
-    label: "Blog",
-    href: "#",
-  },
-  {
-    label: "Music & Tabs",
-    href: "#",
-  },
-  {
-    label: "Books",
-    href: "/books",
-  },
-  
-  {
-    label: "Apps",
+   {
+    label: "Software",
     children: [
       {
-        label: "Capitnest.com",
+        label: "TrustShield",
         subLabel: "Trending Design to inspire you",
-        href: "#",
+        href: "/software/trustshield",
       },
       {
         label: "Wellbe",
         subLabel: "Up-and-coming Designers",
-        href: "#",
+        href: "/software/wellbe",
       },
     ],
   },
   {
     label: "About",
-    href: "#",
+    href: "/about",
   },
+  
+
+  
 ];

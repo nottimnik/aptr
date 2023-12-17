@@ -2,11 +2,19 @@ import {
   Flex,
   Stack,
   Wrap,
-
+  Heading,
+  chakra,
+  Button,
+  Image,
   Text,
+  Container,
+  Skeleton,
+  useColorModeValue,
+  Box,
 } from "@chakra-ui/react";
 
 import { BiLinkExternal } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import { Layout } from "./../components/Layout";
@@ -14,94 +22,107 @@ import { Layout } from "./../components/Layout";
 export default function Home() {
   return (
     <Layout>
-      <Stack>
-        <Stack direction={"row"}>
-          <Stack width="500px">
-            <img src="/images/pages/home/home_art.jpg" alt="home_vector_art" width="500px" />
-          </Stack>
+      <Image
+        src="/images/background.jpg"
+        width="100%"
+        alt="background"
+        objectFit="cover"
+        height="400px"
+        filter="brightness(.8)"
+      />
+      <p
+        style={{
+          fontStyle: "italic",
+          textAlign: "right",
+          color: "gray",
+          fontSize: "10px",
+        }}
+      >
+        “Aeneas Flees Burning Troy,” by Federico Barocci (1598). Via Wikimedia
+        Commons.
+      </p>
 
-          <Stack
-            direction={"column"}
-            spacing={3}
-            align={"center"}
-            top="0px"
-            position={"relative"}
+      <Text
+        color="white"
+        fontSize="30px"
+        fontWeight="600"
+        width="800px"
+        marginTop="40px"
+      >
+        Studying the human behavior and empowering lives through innovative
+        psychological technologies.
+      </Text>
+
+      <Link to="/about">
+        <Button marginTop="10px">Learn about APTR</Button>
+      </Link>
+
+      <Text
+        color="white"
+        fontSize="50px"
+        fontWeight="700"
+        marginTop="50px"
+        marginBottom="20px"
+        
+      >
+        Software
+      </Text>
+
+      <Flex justifyContent="center" flexWrap="wrap">
+        <Box width={{ base: "100%", lg: "50%" }} padding="12px" color="gray">
+          <Text
+            color="white"
+            fontSize="40px"
+            fontWeight="600"
+            marginTop="0px"
+            textAlign="center"
+            display="flex"
           >
-            <h1
-              style={{
-                fontWeight: 700,
-                fontSize: "60px",
-                textAlign: "center",
-                marginTop: "30px",
-              }}
-            >
-              Ungureanu Călin
-            </h1>
-            <Text
-              fontSize={"lg"}
-              fontFamily={"Caveat"}
-              position={"absolute"}
-              right={"-125px"}
-              transform={"rotate(10deg)"}
-            >
-              Known also as Timnik
-            </Text>
-          </Stack>
-        </Stack>
+            <Image
+              src="/images/icons/wellbe.png"
+              height="40px"
+              marginTop="10px"
+              marginRight="5px"
+            />
+            WellBe
+          </Text>
 
-        <p
-          style={{
-            fontSize: "22px",
-            textAlign: "center",
-            marginTop: "0px",
-            marginBottom: "30px",
-          }}
-        >
-          Cybersecurity enthusiast, serial-entrepreneur, musician
-        </p>
+          <Text>
+            Your personal sanctuary for mental well-being. In the hustle and
+            bustle of daily life, finding moments of peace and tranquility is
+            essential for a healthy mind. WellBe is your companion on the
+            journey to better mental health, offering a diverse range of
+            mindfulness exercises and meditation practices tailored to your
+            needs.
+          </Text>
+          
+          <Button color="white" marginTop="10px" variant="link">Learn More</Button>
+        </Box>
 
-        <Wrap justifyContent="center">
-          <a href="https://medium.com/@timnik" target="_blank" rel="noreferrer">
-            <Box>
-              <Flex justifyContent="space-between">
-                <h1>Writeups</h1>
-                <BiLinkExternal />
-              </Flex>
-              <p>My writeups of ctf challenges and tryhackme rooms.</p>
-            </Box>
-          </a>
+        <Box width={{ base: "100%", lg: "50%" }} padding="12px" color="gray">
+          <Text
+            color="white"
+            fontSize="40px"
+            fontWeight="600"
+            marginTop="0px"
+            textAlign="center"
+            display="flex"
+            NeuralAds
+          >
+            Neural Ads
+          </Text>
 
-          <a href="https://capitnest.com/" target="_blank" rel="noreferrer">
-            <Box>
-              <Flex justifyContent="space-between">
-                <h1>Capitnest.com</h1>
-                <BiLinkExternal />
-              </Flex>
-              <p>Crypto price data & news tracking app I've build.</p>
-            </Box>
-          </a>
-        </Wrap>
-      </Stack>
+          <Text>
+            Neural Ads is a neuromarketing analytics platform that uses advanced
+            neuropsychology techniques, such as fMRI and EEG, with ai to provide
+            insights into consumer behavior and help you elevate
+            your marketing strategies by decoding the subconscious responses to
+            your advertisements and product designs.
+          </Text>
+
+          <Button color="white" marginTop="10px" variant="link">Learn More</Button>
+        </Box>
+      </Flex>
     </Layout>
   );
 }
-
-const Box = styled.div`
-  border-width: 1px;
-  border-radius: var(--borderWidth);
-  padding: 10px;
-  width: 350px;
-  background-color: rgba(0, 0, 0, 0.02);
-  margin-right: 5px;
-  margin-left: 5px;
-
-  h1 {
-    font-size: 20px;
-    font-weight: 500;
-  }
-
-  &:hover {
-    color: rgba(0, 0, 0, 0.64);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 2px;
-  }
-`;

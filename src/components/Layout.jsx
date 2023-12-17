@@ -1,14 +1,15 @@
 import React from "react";
 import { Box, Container } from "@chakra-ui/react";
 import Navbar from "./Navbar";
+import {Footerr} from "./Footer";
 
 export function Layout({ children }) {
   return (
-    <Box mb={16}>
+    <Box mb={16} className="layout">
       <Navbar />
 
-      <Container maxW="container.xl">{children}</Container>
+      <Container maxW="container.xl" >{children}</Container>
+      <Footerr />
     </Box>
   );
 }
-
